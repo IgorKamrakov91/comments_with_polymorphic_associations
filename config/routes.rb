@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :actors
-  resources :films
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  devise_for :users
+  resources :actors do
+    resources :comments, module: :actors
+  end
+  resources :films do
+    resources :comments, module: :films
+  end
+
+  root 'films#index'
 end
